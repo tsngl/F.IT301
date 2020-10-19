@@ -109,9 +109,9 @@
                 $sql = "INSERT INTO student(st_code, st_name, st_huis, st_nas,st_phone_number, st_address, st_password) VALUES ('$st_code','$st_name', '$st_huis', '$st_nas', '$st_phone_number', '$st_address', '$st_password')";
               } 
               if(mysqli_query($conn, $sql)){
-                echo "<script>
-                    alert('Record added succesccfully');
-                </script>";
+                echo "<
+                    Record added succesccfully
+                </div>";
 
               }else {
                echo "<div class='alert alert-dark' role='alert'>
