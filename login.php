@@ -31,30 +31,30 @@
       <div class="row">
         <form class="col-md-6" method="POST">
           <div class="form-group">
-            <label>Email address</label>
+            <label>Оюутны код</label>
             <input
               type="name"
               class="form-control"
-              placeholder="Enter name"
+              placeholder="Оюутны код"
               name="username"
             />
-            <small id="emailHelp" class="form-text text-muted"
-              >look hhh .</small>
+            <!--<small id="emailHelp" class="form-text text-muted"
+              >look hhh .</small>-->
           </div>
           <div class="form-group">
-            <label>Password</label>
+            <label>Нууц үг</label>
             <input
               type="password"
               name="password"
               class="form-control"
-              placeholder="Password"
+              placeholder="Нууц үг"
             />
           </div>
-          <div class="custom-control custom-checkbox my-1 mr-sm-2">
+        <!--  <div class="custom-control custom-checkbox my-1 mr-sm-2">
                 <input type="checkbox" class="custom-control-input" id="customControlInline">
                 <label class="custom-control-label" for="customControlInline">Remember</label>
-         </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+         </div> -->
+         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -62,8 +62,6 @@
   </body>
 </html>
 <?php
- session_start();
-
  if($_SERVER["REQUEST_METHOD"] == "POST"){
     include('./config.php');
     // username and password sent from form
@@ -71,13 +69,13 @@
     $userName = $_POST['username'];
     $passWord = $_POST['password'];
 
-    $result = $conn->query("SELECT id FROM user WHERE username = '".$userName."' AND password = '".$passWord."'");
+    $result = $conn->query("SELECT id FROM student WHERE st_code = '".$userName."' AND st_password = '".$passWord."'");
     echo $conn->error;
     // if result matched $userName and $password. 
 
     if ($result->num_rows > 0) {
-        $_SESSION['login_user']=$userName;
-
+        session_start();
+        $_SESSION['login_user'] = $userName;
         header("location: welcome.php");
     }else {
      echo  "Your Login Name or Password is invalid";

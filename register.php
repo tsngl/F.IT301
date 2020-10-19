@@ -1,8 +1,3 @@
-<?php
-// import database config
-include 'config.php';
-if()
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,95 +31,97 @@ if()
       <div class="row">
         <form class="col-md-6" method="POST">
           <div class="form-group ">
-          <label>Овог</label>
+          <label>Оюутны Код</label>
             <input
-              type="name"
+              type="text"
               class="form-control"
-              placeholder="Эцэг эхийн нэр"
-              name="lastname"
-            />
-            <label>Нэр</label>
+              placeholder="Оюутны код"
+              name="student_code"
+              required/>
+            <label>Оюутны Нэр</label>
             <input
-              type="name"
+              type="text"
               class="form-control"
-              placeholder="Өөрийн нэр"
-              name="username"
-            />
-            <label>Нэвтрэх нэр</label>
-            <input
-              type="name"
-              class="form-control"
-              placeholder="Нэвтрэх нэр"
+              placeholder="Оюутны нэр"
               name="firstname"
-            />
-            <label>Төрсөн он сар өдөр</label>
-                <input class="form-control" type="date" value="2011-08-19" id="example-date-input" name="date" />
-                <label for="exampleSelect1">Хүйс</label>
-                <select class="form-control" id="exampleSelect1" name="gender">
+              required/>
+            <label for="exampleSelect1">Хүйс</label>
+                <select class="form-control" id="exampleSelect1" name="gender" required>
                 <option>эр</option>
                 <option>эм</option>
                 </select>
-                <label for="exampleSelect1">Төрсөн аймаг сум хот</label>
-                <select class="form-control" id="exampleSelect1">
-                <option>Архангай</option>
-                <option>Баян-Хонгор</option>
-                <option>Баян-Өлгий</option>
-                <option>Булган</option>
-                <option>Говь-Алтай</option>
-                <option>Говьсүмбэр</option>
-                <option>Дархан-Уул</option>
-                <option>Дорноговь</option>
-                <option>Дорнод</option>
-                <option>Дундговь</option>
-                <option>Завхан</option>
-                <option>Орхон</option>
-                <option>Өвөрхангай</option>
-                <option>Өмнөговь</option>
-                <option>Сүхбаатар</option>
-                <option>Сэлэнгэ</option>
-                <option>Төв</option>
-                <option>Увс</option>
-                <option>Ховд</option>
-                <option>Хөвсгөл</option>
-                <option>Хэнтий</option>
-                </select>
-                <label for="exampleSelect1">Спортын цол зэрэг</label>
-                <select class="form-control" id="exampleSelect1">
-                <option>Залуу харваач</option>
-                <option>1-р зэрэг</option>
-                <option>2-р зэрэг</option>
-                <option>3-р зэрэг</option>
-                <option>Аймгийн мэргэн</option>
-                <option>Спортын дэд мастер</option>
-                <option>Спортын мастер</option>
-                <option>Монгол улсын гарамгай харваач</option>
-                <option>Монгол улсын гоц харваач</option>
-                <option>Монгол улсын гарамгай харваач</option>
-                <option>Монгол улсын мэргэн</option>
-                <option>Монгол улсын хошой мэргэн</option>
-                <option>Монгол улсын даян мэргэн</option>
-                <option>Монгол улсын дархан мэргэн</option>
-                <option>Монгол улсын даяаар дурсах мэргэн</option>
-                <option>Монгол улсын даяаар дурсах дархан мэргэн</option>
-                </select>
-                <label for="exampleTextarea">Тэмцээнүүдэд гаргасан амжилт/Зөвхөн бүс, улс, олон улс/</label>
-                <textarea class="form-control" id="exampleTextarea" rows="2"></textarea>
+            <label>Нас</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Нас"
+              name="age"
+              required/>
+            <label>Утасны дугаар</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Утасны дугаар"
+              name="phone_number"
+              required/>
+            <label>Гэрийн хаяг</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Гэрийн хаяг"
+              name="address"
+              required/>
             <label>Нууц үг</label>
             <input
               type="password"
               name="password"
               class="form-control"
               placeholder="Password"
-            />
+              required/>
             <label>Нууц үг баталгаажуулах</label>
             <input
               type="password"
-              name="password"
+              name="password_confirm"
               class="form-control"
               placeholder="Password"
-            />
+              required/>
            <!-- <small id="emailHelp" class="form-text text-muted"
               >look hhh .</small> -->
+              <?php
+              // import database config
+              include 'config.php';
+
+              if(isset($_POST['student_code']) && isset($_POST['firstname']) && isset($_POST['gender']) && isset($_POST['age']) && isset($_POST['phone_number']) && isset($_POST['address']) && isset($_POST['password']) && isset($_POST['password_confirm'])){
+
+              // sanitize
+              $st_code = mysqli_real_escape_string($conn,$_REQUEST['student_code']);
+              $st_name =  mysqli_real_escape_string($conn,$_REQUEST['firstname']);
+              $st_huis = mysqli_real_escape_string($conn,$_REQUEST['gender']);
+              $st_nas = mysqli_real_escape_string($conn,$_REQUEST['age']);
+              $st_phone_number = mysqli_real_escape_string($conn,$_REQUEST['phone_number']);
+              $st_address = mysqli_real_escape_string($conn,$_REQUEST['address']);
+              $st_password = mysqli_real_escape_string($conn,$_REQUEST['password']);
+              $st_password_confirm = mysqli_real_escape_string($conn,$_REQUEST['password_confirm']);
+
+              //Password checking
+              if($st_password === $st_password_confirm){
+              // sql
+                $sql = "INSERT INTO student(st_code, st_name, st_huis, st_nas,st_phone_number, st_address, st_password) VALUES ('$st_code','$st_name', '$st_huis', '$st_nas', '$st_phone_number', '$st_address', '$st_password')";
+              } 
+              if(mysqli_query($conn, $sql)){
+                echo "<script>
+                    alert('Record added succesccfully');
+                </script>";
+
+              }else {
+               echo "<div class='alert alert-dark' role='alert'>
+                    Could not able to execute". $sql. ".mysqli_error($conn);."."
+                </div>";
+                
+              }
+
+              }
+?>
           </div>
           <button type="submit" class="btn btn-primary">Бүртгүүлэх</button>
         </form>
