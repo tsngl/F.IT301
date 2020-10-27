@@ -1,5 +1,20 @@
 <?php
  require('lock.php');
+ include 'config.php';
+
+ $limit = 5;
+ $page = isset($_GET['page']) ? $_GET['page'] : 1;
+ $start = ($page - 1) * $limit;
+ $result = $conn->query("SELECT * FROM student LIMIT $start,$limit");
+ $customers = $result->fetch_all(MYSQLI_ASSOC);
+
+  $result1 = $conn->query("SELECT count(id) AS id FROM student");
+	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
+	$total = $custCount[0]['id'];
+	$pages = ceil( $total / $limit );
+
+	$Previous = $page - 1;
+	$Next = $page + 1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,35 +51,48 @@ Add Stuident
     </tr>
   </thead>
   <tbody>
-   <?php
-
-   
-$result = mysqli_query($conn,"SELECT * FROM student");
-
-while($row = mysqli_fetch_array($result))
-{
-echo "<tr>";
-echo "<td>" . $row['id'] . "</td>";
-echo "<td>" . $row['st_code'] . "</td>";
-echo "<td>" . $row['st_name'] . "</td>";
-echo "<td>" . $row['st_huis'] . "</td>";
-echo "<td>" . $row['st_nas'] . "</td>";
-echo "<td>" . $row['st_phone_number'] . "</td>";
-echo "<td>" . $row['st_address'] . "</td>";
-echo "<td>
-<a class='mr-2' style='color:blue' href=edit.php?id=" .$row['id']. ">Edit</a>
-<a style='color:red' href=delete.php?id=" .$row['id']. ">Delete</a>
-</td>";
-echo "</tr>";
-}
-mysqli_close($conn);
-?>
+<?php foreach($customers as $customer) : ?>
+<tr>
+    <td><?= $customer['id']; ?></td>
+    <td><?= $customer['st_code']; ?></td>
+    <td><?= $customer['st_name']; ?></td>
+    <td><?= $customer['st_huis']; ?></td>
+    <td><?= $customer['st_nas']; ?></td>
+    <td><?= $customer['st_phone_number']; ?></td>
+    <td><?= $customer['st_address']; ?></td>
+    <td><a class='mr-2'
+           style='color:blue' 
+           href=edit.php?id=" .$row['id']. ">Edit</a>
+        <a style='color:red' 
+           href=delete.php?id=" .$row['id']. ">Delete</a></td>
+</tr>
+<?php endforeach; ?>
   </tbody>
 </table>
+<div class="col-md-10 container">
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+				    <li class="page-item">
+				      <a class="page-link" href="welcome.php?page=<?= $Previous; ?>" aria-label="Previous">
+				        <span aria-hidden="true">&laquo; Previous</span>
+				      </a>
+				    </li>
+				    <?php for($i = 1; $i<= $pages; $i++) : ?>
+				    	<li  class="page-item"><a class="page-link" href="welcome.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+				    <?php endfor; ?>
+				    <li class="page-item">
+				      <a class="page-link" href="welcome.php?page=<?= $Next; ?>" aria-label="Next">
+				        <span aria-hidden="true">Next &raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+			</div>
 <?php
+//Tooluur
 $num_rows = mysqli_num_rows($result);
+echo "Нийт оюутны тоо: $num_rows \n";
 
-echo "$num_rows Rows\n";
 ?>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
