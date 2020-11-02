@@ -52,10 +52,9 @@ INSERT INTO `student` (`id`, `st_code`, `st_name`, `st_huis`, `st_nas`, `st_phon
 (7, 'B170910007', 'Olziisaikhan', 'эр', 21, 88212110, 'selenge', 'olziolzi'),
 (10, 'B170910008', 'Nasanbat', 'эр', 23, 89766712, 'darhan-Uul', 'hihihi'),
 (11, 'B170910009', 'Badamtsetseg', 'эм', 21, 99966442, 'darhan-Uul', 'badmaa11'),
-(12, 'B170910005', 'Khuvituguldur', 'эр', 20, 99557323, 'darhan-Uul', 'tugitugi'),
-(13, 'B170910010', 'Telmen', 'эр', 23, 99976543, 'darhan-Uul', 'telmen'),
-(14, 'B170910011', 'Lhagwadorj', 'эр', 23, 88538959, 'darhan-Uul', 'lhagwa'),
-(15, 'B170910012', 'Bilguun', 'эр', 23, 99112231, 'darhan-Uul', 'bekbek');
+(12, 'B170910010', 'Telmen', 'эр', 23, 99976543, 'darhan-Uul', 'telmen'),
+(13, 'B170910011', 'Lhagwadorj', 'эр', 23, 88538959, 'darhan-Uul', 'lhagwa'),
+(14, 'B170910012', 'Bilguun', 'эр', 23, 99112231, 'darhan-Uul', 'bekbek');
 
 --
 -- Indexes for dumped tables

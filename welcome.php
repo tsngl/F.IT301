@@ -29,13 +29,13 @@
   <a class="navbar-brand" href="#">
     HOME
   </a>
-  <h5><a href="logout.php">Sign Out <?php
+  <h5><a href="logout.php">Гарах<?php
 echo $_SESSION['login_user'];
 ?></a></h5>
 </nav>
 <div class="container mt-2">
 <a class="btn btn-primary mb-2 mt-2 float-right" href='register.php'>
-Add Stuident
+Оюутан нэмэх
 </a>
 <table class="table">
   <thead>
@@ -74,7 +74,7 @@ Add Stuident
 					<ul class="pagination">
 				    <li class="page-item">
 				      <a class="page-link" href="welcome.php?page=<?= $Previous; ?>" aria-label="Previous">
-				        <span aria-hidden="true">&laquo; Previous</span>
+				        <span aria-hidden="true">&laquo; Өмнөх</span>
 				      </a>
 				    </li>
 				    <?php for($i = 1; $i<= $pages; $i++) : ?>
@@ -82,7 +82,7 @@ Add Stuident
 				    <?php endfor; ?>
 				    <li class="page-item">
 				      <a class="page-link" href="welcome.php?page=<?= $Next; ?>" aria-label="Next">
-				        <span aria-hidden="true">Next &raquo;</span>
+				        <span aria-hidden="true">Дараах &raquo;</span>
 				      </a>
 				    </li>
 				  </ul>

@@ -109,9 +109,7 @@
                 $sql = "INSERT INTO student(st_code, st_name, st_huis, st_nas,st_phone_number, st_address, st_password) VALUES ('$st_code','$st_name', '$st_huis', '$st_nas', '$st_phone_number', '$st_address', '$st_password')";
               } 
               if(mysqli_query($conn, $sql)){
-                echo "<
-                    Record added succesccfully
-                </div>";
+                header("Location: welcome.php");
 
               }else {
                echo "<div class='alert alert-dark' role='alert'>
