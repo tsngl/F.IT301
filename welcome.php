@@ -22,6 +22,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    
     <title>Welcome</title>
 </head>
 <body>
@@ -29,9 +51,9 @@
   <a class="navbar-brand" href="#">
     HOME
   </a>
-  <h5><a href="logout.php">Гарах<?php
+  <h5><a href="logout.php"><?php
 echo $_SESSION['login_user'];
-?></a></h5>
+?> Гарах</a></h5>
 </nav>
 <div class="container mt-2">
 <a class="btn btn-primary mb-2 mt-2 float-right" href='register.php'>
@@ -47,7 +69,7 @@ echo $_SESSION['login_user'];
       <th scope="col">Нас</th>
       <th scope="col">Утасны дугаар</th>
       <th scope="col">Хаяг</th>
-      <th scope="col">Action</th>
+      <th scope="col">Үйлдлүүд</th>
     </tr>
   </thead>
   <tbody>
@@ -56,20 +78,20 @@ echo $_SESSION['login_user'];
     <td><?= $customer['id']; ?></td>
     <td><?= $customer['st_code']; ?></td>
     <td><?= $customer['st_name']; ?></td>
-    <td><?= $customer['st_huis']; ?></td>
+    <td><?= $customer['st_huis'] == 1 ? 'Эр' : 'Эм'?></td>
     <td><?= $customer['st_nas']; ?></td>
     <td><?= $customer['st_phone_number']; ?></td>
     <td><?= $customer['st_address']; ?></td>
     <td><a class='mr-2'
            style='color:blue' 
-           href=edit.php?id=" .$row['id']. ">Edit</a>
-        <a style='color:red' 
-           href=delete.php?id=" .$row['id']. ">Delete</a></td>
+           href="edit.php?id=<?= $customer['id']; ?>">Засах</a>
+        
+    </td>
 </tr>
 <?php endforeach; ?>
   </tbody>
 </table>
-<div class="col-md-10 container">
+<!-- <div class="col-md-10 container">
 				<nav aria-label="Page navigation">
 					<ul class="pagination">
 				    <li class="page-item">
@@ -87,13 +109,14 @@ echo $_SESSION['login_user'];
 				    </li>
 				  </ul>
 				</nav>
-			</div>
+			</div> -->
+
 <?php
 //Tooluur
-$num_rows = mysqli_num_rows($result);
-echo "Нийт оюутны тоо: $num_rows \n";
+// $num_rows = mysqli_num_rows($result);
+// echo "Нийт оюутны тоо: $num_rows \n";
 
-?>
+?> 
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

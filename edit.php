@@ -1,19 +1,9 @@
 <?php
-require './config.php';
+include ('config.php');
 if(isset($_GET['id'])){
-    $id = $_GET['id'];
-    $query = "SELECT * FROM `student` WHERE `student`.`id` = $id";
-    $result = mysqli_query($conn,$query);
-    $data = null;
-    if($result){
-        $data = mysqli_fetch_assoc($result);
-    }
-    else{
-        echo 'Error';
-    }
-}
-else{ 
-    header("location: welcome.php");
+    $id = (int)$_GET['id'];
+    $edit = $conn->query("SELECT * FROM student WHERE id = $id");
+    $data = $edit->fetch_assoc();
 }
 ?>
 
@@ -56,7 +46,7 @@ else{
               class="form-control"
               placeholder="Оюутны код"
               name="student_code"
-              value="<?php echo $data['st_code']; ?>"
+              value="<?= $data['st_code']; ?>"
               required/>
             <label>Оюутны Нэр</label>
             <input
@@ -64,21 +54,21 @@ else{
               class="form-control"
               placeholder="Оюутны нэр"
               name="firstname"
-              value="<?php echo $data['st_name']; ?>"
+              value="<?= $data['st_name']; ?>"
               required/>
             <label for="exampleSelect1">Хүйс</label>
                 <select class="form-control" id="exampleSelect1" name="gender" 
-                 selected="<?php echo $data['st_huis']; ?>"
+                 selected="<?= $data['st_huis']; ?>"
                  required>
-                <option>эр</option>
-                <option>эм</option>
+                 <option value="1" <?= $data['st_huis'] == 1 ? 'selected' :'' ?>>Эр</option>
+                  <option value="0" <?= $data['st_huis'] == 0 ? 'selected' :'' ?>>Эм</option>
                 </select>
             <label>Нас</label>
             <input
               type="text"
               class="form-control"
               placeholder="Нас"
-              value="<?php echo $data['st_nas']; ?>"
+              value="<?= $data['st_nas']; ?>"
               name="age"
               required/>
             <label>Утасны дугаар</label>
@@ -87,21 +77,21 @@ else{
               class="form-control"
               placeholder="Утасны дугаар"
               name="phone_number"
-              value="<?php echo $data['st_phone_number']; ?>"
+              value="<?= $data['st_phone_number']; ?>"
               required/>
             <label>Гэрийн хаяг</label>
             <input
               type="text"
               class="form-control"
               placeholder="Гэрийн хаяг"
-              value="<?php echo $data['st_address']; ?>"
+              value="<?= $data['st_address']; ?>"
               name="address"
               required/>
            <!-- <small id="emailHelp" class="form-text text-muted"
               >look hhh .</small> -->
               <?php
               // import database config
-              if(isset($_POST['student_code']) && isset($_POST['firstname']) && isset($_POST['gender']) && isset($_POST['age']) && isset($_POST['phone_number']) && isset($_POST['address']) && isset($_POST['password']) && isset($_POST['password_confirm'])){
+              if(isset($_POST['student_code']) && isset($_POST['firstname']) && isset($_POST['gender']) && isset($_POST['age']) && isset($_POST['phone_number']) && isset($_POST['address'])){
 
               // sanitize
               $st_code = mysqli_real_escape_string($conn,$_REQUEST['student_code']);
@@ -110,31 +100,21 @@ else{
               $st_nas = mysqli_real_escape_string($conn,$_REQUEST['age']);
               $st_phone_number = mysqli_real_escape_string($conn,$_REQUEST['phone_number']);
               $st_address = mysqli_real_escape_string($conn,$_REQUEST['address']);
-              $st_password = mysqli_real_escape_string($conn,$_REQUEST['password']);
-              $st_password_confirm = mysqli_real_escape_string($conn,$_REQUEST['password_confirm']);
-
-              //Password checking
-              if($st_password === $st_password_confirm){
-              // sql
-             $sql = "UPDATE student SET st_code = $st_code, st_name=$st_name, st_huis=$st_huis, st_nas=$st_nas, st_phone_number=$st_phone_number, st_address=$st_address, st_password=$st_password WHERE id = $id";
+             $sql = "UPDATE student SET st_code = '$st_code', st_name='$st_name', st_huis='$st_huis', st_nas='$st_nas', st_phone_number='$st_phone_number', st_address='$st_address' WHERE id = '$id'";
             
               if(mysqli_query($conn, $sql)){
-                echo "<div>
-                Record added succesccfully
-                </div>";
+                header("Location: welcome.php");
               }
               else {
-               echo "<div class='alert alert-dark' role='alert'>
-                    Could not able to execute". $sql. ".mysqli_error($conn);.".";
-                </div>"; 
+               echo mysqli_error($conn);
               }
-            }
+            
         }
 
 
         ?>
           </div>
-          <button type="submit" class="btn btn-primary">Бүртгүүлэх</button>
+          <button type="submit" class="btn btn-primary">Хадгалах</button>
         </form>
       </div>
     </div>
